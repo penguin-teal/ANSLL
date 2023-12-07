@@ -12,6 +12,6 @@ size_t fGetSize(FILE *f)
     // because the seeking method is non-standard
     struct stat statStruct;
     int descriptor = fileno(f);
-    fstat(descriptor, &statStruct);
-    return statStruct.st_size;
+    int failed = fstat(descriptor, &statStruct);
+    return failed ? 0 : statStruct.st_size;
 }
