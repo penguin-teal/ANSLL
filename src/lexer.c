@@ -367,6 +367,7 @@ bool lexFile(FILE *src, size_t srcSize, const char *srcName, struct Token **toke
     if(!tokenSpace)
     {
         fprintf(stderr, "Not enough memory for the lexer tokens.");
+        free(stringSpace);
         return false;
     }
     struct Token *atTokenSpace = tokenSpace;
