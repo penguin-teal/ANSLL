@@ -82,6 +82,9 @@ enum TokenKind
     TOKEN_SIGNED_INT      =   -43, // <int literal>
     TOKEN_UNSIGNED_INT    =   -44, // <uint literal>
     TOKEN_LOCAL_VAR       =   -45, // $<identifier>
+    TOKEN_POUND           =   -46, // # comment
+    TOKEN_IS_EQUAL        =   -47, // a == b
+    TOKEN_FN              =   -48, // fn i
 };
 
 #endif
