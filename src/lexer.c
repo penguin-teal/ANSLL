@@ -256,7 +256,13 @@ static enum TokenKind getToken(
             case '~':
                 return TOKEN_BITWISE_NOT;
             case '=':
-                return TOKEN_EQUAL;
+                if(*ch == '=')
+                {
+                    *ch = getc(src);
+                    fLen(fpos, 2);
+                    return TOKEN_IS_EQUAL;
+                }
+                else return 0;
             case ';':
                 return TOKEN_TERMINATE;
             case '<':
