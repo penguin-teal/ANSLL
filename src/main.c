@@ -24,19 +24,19 @@ int main(int argc, char **argv)
         char *strings;
         if(!lexFile(srcF, fSize, "testcode.ansll", &tokens, &strings))
         {
-            fprintf(stderr, "Compilation Failed - Lexing failed.");
+            fprintf(stderr, "Compilation Failed - Lexing failed.\n");
             ret = 1;
             goto LexingFailed;
         }
 
         if(false)
         {
-            fprintf(stderr, "Compilation Failed - Compiling failed.");
+            fprintf(stderr, "Compilation Failed - Compiling failed.\n");
             ret = 1;
             goto CompilingFailed;
         }
 
-        if(verbose) printf("Compiled file '%s'.", "testcode.ansll");
+        if(verbose) printf("Compiled file '%s'.\n", "testcode.ansll");
 
     CompilingFailed:
         free(tokens);
