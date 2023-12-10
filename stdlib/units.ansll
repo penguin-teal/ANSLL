@@ -1,0 +1,77 @@
+## Standard units.
+module std::units;
+
+# Distance units
+
+## Meters
+unitdef m;
+
+## Micrometers (microns)
+unitdef μm 1E-6 m;
+unitalias um μm;
+
+## Millimeters
+unitdef mm 1E-3 m;
+
+## Centimeters
+unitdef cm 1E-2 m;
+
+## Decimeters
+unitdef dm 1E-1 m;
+
+## Decameters (dekameters)
+unitdef dam 10 m;
+
+## Hectometers
+unitdef hm 100 m;
+
+## Kilometers
+unitdef km 1000 m;
+
+## Inches
+unitdef in 25.4 mm;
+## Feet
+unitdef ft 3 in;
+## Yards
+unitdef yd 3 ft;
+## Miles
+unitdef mi 1760 yd;
+
+# Time units
+
+## Seconds
+unitdef s;
+
+## Nanoseconds
+unitdef ns 1E-9 s;
+
+## Microseconds
+unitdef μs 1E-6 s;
+unitalias us μs;
+
+## Milliseconds
+unitdef ms 1E-3 s;
+
+## Minutes
+unitdef min 60 s;
+
+## Hours
+unitdef h 3600 s;
+unitalias hr h;
+
+## Days
+unitdef day 24 h;
+unitalias days day;
+
+## Months
+unitdef month 30.4375 s;
+unitalias months month;
+
+## Weeks
+unitdef week 7 day;
+unitalias weeks week;
+
+## Years
+unitdef yr 365 day;
+unitalias y yr;
+
