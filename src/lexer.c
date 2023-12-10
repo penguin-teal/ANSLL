@@ -80,6 +80,10 @@ static enum TokenKind getToken(
         else if(!strncmp(id, "import", idMax)) return TOKEN_IMPORT;
         else if(!strncmp(id, "extern", idMax)) return TOKEN_EXTERN;
         else if(!strncmp(id, "module", idMax)) return TOKEN_MODULE;
+        else if(!strncmp(id, "unitdef", idMax)) return TOKEN_UNITDEF;
+        else if(!strncmp(id, "unitalias", idMax)) return TOKEN_UNITALIAS;
+        else if(!strncmp(id, "using", idMax)) return TOKEN_USING;
+        else if(!strncmp(id, "fn", idMax)) return TOKEN_USING;
         else return TOKEN_IDENTIFIER;
     }
     else if(isdigit(lastChar))
@@ -316,6 +320,8 @@ static enum TokenKind getToken(
                 return TOKEN_PAREN_OPEN;
             case ')':
                 return TOKEN_PAREN_CLOSE;
+            case '#':
+                return TOKEN_POUND;
 
         }
 

@@ -85,6 +85,9 @@ enum TokenKind
     TOKEN_POUND           =   -46, // # comment
     TOKEN_IS_EQUAL        =   -47, // a == b
     TOKEN_FN              =   -48, // fn i
+    TOKEN_UNITDEF         =   -49, // unitdef i OR unitdef i i
+    TOKEN_UNITALIAS       =   -50, // unitalias i i
+    TOKEN_USING           =   -51, // using i
 };
 
 #endif
