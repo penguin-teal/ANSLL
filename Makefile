@@ -8,6 +8,7 @@ EXTRA_CFLAGS	:=
 WARNINGS		:= -Wall -Wextra -Wfloat-equal -Wundef
 ERRORS			:= -Werror=implicit-int -Werror=implicit-function-declaration
 CFLAGS 		    := $(WARNINGS) $(ERRORS) -std=c99 $(EXTRA_CFLAGS) -D_POSIX_C_SOURCE
+LLVM_FLAGS		:= $(shell llvm-config --cflags --ldflags --system-libs --libs all)
 CURRENT_CFLAGS	:=
 
 BIN   		    := ./bin
@@ -35,7 +36,7 @@ debug: $(OUT) tests
 
 $(OUT): $(SRCS)
 	$(MKDIR) $(BIN)
-	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $^ -o $(OUT)
+	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) $^ -o $(OUT)
 
 tests: $(TESTOUT)
 	$(RM) $^
