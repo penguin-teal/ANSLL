@@ -78,16 +78,14 @@ enum TokenKind
     TOKEN_WHILE           =   -40, // while
     TOKEN_GOTO            =   -41, // goto
     TOKEN_CONTINUE        =   -42, // continue
-
     TOKEN_SIGNED_INT      =   -43, // <int literal>
     TOKEN_UNSIGNED_INT    =   -44, // <uint literal>
     TOKEN_LOCAL_VAR       =   -45, // $<identifier>
-    TOKEN_POUND           =   -46, // # comment
-    TOKEN_IS_EQUAL        =   -47, // a == b
-    TOKEN_FN              =   -48, // fn i
-    TOKEN_UNITDEF         =   -49, // unitdef i OR unitdef i i
-    TOKEN_UNITALIAS       =   -50, // unitalias i i
-    TOKEN_USING           =   -51, // using i
+    TOKEN_IS_EQUAL        =   -46, // a == b
+    TOKEN_FN              =   -47, // fn i
+    TOKEN_UNITDEF         =   -48, // unitdef i OR unitdef i i
+    TOKEN_UNITALIAS       =   -49, // unitalias i i
+    TOKEN_USING           =   -50, // using i
 };
 
 #endif

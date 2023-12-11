@@ -51,10 +51,23 @@ static enum TokenKind getToken(
     int lastChar = *ch;
     fAdvance(fpos, lastChar);
 
-    while(isspace(lastChar))
+    while(isspace(lastChar) || lastChar == '#')
     {
-        lastChar = getc(src);
-        fAdvance(fpos, lastChar);
+        if(lastChar == '#')
+        {
+            while(lastChar != '\n')
+            {
+                lastChar = getc(src);
+            }
+            lastChar = getc(src);
+            fAdvance(fpos, '\n');
+            fAdvance(fpos, lastChar);
+        }
+        else
+        {
+            lastChar = getc(src);
+            fAdvance(fpos, lastChar);
+        }
     }
 
 
@@ -320,9 +333,6 @@ static enum TokenKind getToken(
                 return TOKEN_PAREN_OPEN;
             case ')':
                 return TOKEN_PAREN_CLOSE;
-            case '#':
-                return TOKEN_POUND;
-
         }
 
         return 0;
