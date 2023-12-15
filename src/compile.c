@@ -33,6 +33,53 @@ static void destroyLlvm(LLVMContextRef context,
     LLVMContextDispose(context);
 }
 
+static bool expect(enum TokenKind expected, struct Token actual)
+{
+    if(expected == actual.symbol)
+    {
+        return true;
+    }
+    else
+    {
+        fprintf(
+                stderr, "Expected token '%s' but got '%s'.",
+                getTokenKindString(expected), getTokenKindString(actual.symbol)
+        );
+        return false;
+    }
+}
+
+static bool compileTokens(
+    const struct Token *tokens,
+    const char *strings,
+    bool verbose
+)
+{
+    if(!expect(TOKEN_MODULE, tokens[0])) return false;
+    if(!expect(TOKEN_IDENTIFIER, tokens[1])) return false;
+    if(!expect(TOKEN_TERMINATE, tokens[2])) return false;
+
+    const struct Token *atToken = tokens + 3;
+    while(true)
+    {
+        switch(atToken->symbol)
+        {
+            case TOKEN_FN:
+                break;
+            case TOKEN_UNITDEF:
+                break;
+            case TOKEN_UNITALIAS:
+                break;
+            default:
+                fprintf(
+                        stderr, "Invalid token '%s' at top-level.",
+                        getTokenKindString(atToken->symbol)
+                );
+                return false;
+        }
+    }
+}
+
 bool compileToObject(
     const struct Token *tokens,
     const char *strings,
