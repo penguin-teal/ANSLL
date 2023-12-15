@@ -8,6 +8,7 @@
  */
 size_t fGetSize(FILE *f)
 {
+    // NOTE: Not Windows-compatible
     // Get the size from stat rather than just seeking
     // because the seeking method is non-standard
     struct stat statStruct;
