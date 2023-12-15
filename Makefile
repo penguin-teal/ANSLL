@@ -22,6 +22,10 @@ TESTSRCS		:= $(wildcard $(TESTSRC)/*.c)
 TESTBIN			:= ./testbin
 TESTOUT		    := $(TESTBIN)/test
 
+LIBS			:= ./libs
+HBLIB			:= $(LIBS)/libhashedbrown.a
+HBSRC			:= ./.hashedbrown
+
 CHECK_TEST_FLAGS:= -pthread -lcheck -lrt -lm
 
 DESTDIR			:= /usr/local/bin
@@ -34,9 +38,18 @@ release: $(OUT)
 debug: CURRENT_CFLAGS += -g3 -O0 -DDEBUG
 debug: $(OUT) tests
 
-$(OUT): $(SRCS)
+$(OUT): $(SRCS) $(HBLIB)
 	$(MKDIR) $(BIN)
-	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) $^ -o $(OUT)
+	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) -L$(LIBS) -lhashedbrown $^ -o $(OUT)
+
+$(HBSRC):
+	git clone https://github.com/penguin-teal/hashedbrown $(HBSRC)
+
+$(HBLIB): $(HBSRC)
+	$(MKDIR) $(LIBS)
+	make -C$(HBSRC) release
+	cp $(HBSRC)/bin/libhashedbrown.a $(HBLIB)
+	$(RMDIR) $(HBSRC)
 
 tests: $(TESTOUT)
 	$(RM) $^
@@ -51,4 +64,4 @@ install:
 	$(CP) $(OUT) $(DESTDIR)/ansllc
 
 clean:
-	$(RMDIR) $(TESTBIN) $(BIN)
+	$(RMDIR) $(TESTBIN) $(BIN) $(LIBS)
