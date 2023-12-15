@@ -3,14 +3,17 @@
 #include <stdlib.h>
 #include "lexer.h"
 #include "fileIo.h"
+#include "compile.h"
 
 int main(int argc, char **argv)
 {
     int ret = 0;
     bool verbose = true;
 
+    // TODO: Loop through each file
     for(int i = 0; i < 1; i++)
     {
+        // NOTE: For right now for testing hard-code a source file
         FILE *srcF = fopen("./testcode.ansll", "r");
         if(!srcF)
         {
@@ -24,12 +27,15 @@ int main(int argc, char **argv)
         char *strings;
         if(!lexFile(srcF, fSize, "testcode.ansll", &tokens, &strings))
         {
+            // lexFile guarantees that tokens and strings must not be
+            // freed if it returns false
             fprintf(stderr, "Compilation Failed - Lexing failed.\n");
             ret = 1;
             goto LexingFailed;
         }
 
-        if(false)
+        // NOTE: Currently compiling to hard-coded object file name
+        if(!compileToObject(tokens, strings, "./testout.o", verbose))
         {
             fprintf(stderr, "Compilation Failed - Compiling failed.\n");
             ret = 1;
@@ -38,11 +44,14 @@ int main(int argc, char **argv)
 
         if(verbose) printf("Compiled file '%s'.\n", "testcode.ansll");
 
+        // Using goto like this allows for clean up when each
+        // fail incrementally increases stuff that must be freed
     CompilingFailed:
         free(tokens);
         free(strings);
     LexingFailed:
         
+        // If we have no failures, we won't abort early
         if(ret) return ret;
     }
 
