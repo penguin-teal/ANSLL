@@ -476,6 +476,11 @@ ExitWhile:
         &tokStruct,
         sizeof(struct Token)
     );
+    if(!tokenSpaceSize)
+    {
+        fprintf(stderr, "Not enough memory to resize lexer tokens for EOF.");
+        goto Cleanup;
+    }
 
     // We won't cleanup here since we're returning the buffers
     *tokens = tokenSpace;
