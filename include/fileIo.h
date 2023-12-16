@@ -6,7 +6,7 @@
 
 #include <dirent.h>
 
-// NOTE: Platform specific IO details are abstracted so Windows support
+// NOTE: Platform-specific IO details are abstracted so Windows support
 // can be added at some point
 
 /**
