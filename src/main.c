@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "appArgs.h"
 #include "lexer.h"
 #include "fileIo.h"
 #include "compile.h"
@@ -8,7 +9,9 @@
 int main(int argc, char **argv)
 {
     int ret = 0;
-    bool verbose = true;
+
+    struct AppArgs args;
+    if(!doArgp(&args, argc, argv)) return 2;
 
     // TODO: Loop through each file
     for(int i = 0; i < 1; i++)
@@ -35,14 +38,14 @@ int main(int argc, char **argv)
         }
 
         // NOTE: Currently compiling to hard-coded object file name
-        if(!compileToObject(tokens, strings, "./testout.o", verbose))
+        if(!compileToObject(tokens, strings, "./testout.o", args.verbose))
         {
             fprintf(stderr, "Compilation Failed - Compiling failed.\n");
             ret = 1;
             goto CompilingFailed;
         }
 
-        if(verbose) printf("Compiled file '%s'.\n", "testcode.ansll");
+        if(args.verbose) printf("Compiled file '%s'.\n", "testcode.ansll");
 
         // Using goto like this allows for clean up when each
         // fail incrementally increases stuff that must be freed
