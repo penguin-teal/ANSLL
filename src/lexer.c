@@ -377,7 +377,7 @@ bool lexFile(FILE *src, size_t srcSize, const char *srcName, struct Token **toke
     char *stringSpace = malloc(stringSpaceSize);
     if(!stringSpace)
     {
-        fprintf(stderr, "Not enough memory for the lexer identifiers.");
+        fprintf(stderr, "Not enough memory for the lexer identifiers.\n");
         return false;
     }
     char *atStringSpace = stringSpace;
@@ -386,7 +386,7 @@ bool lexFile(FILE *src, size_t srcSize, const char *srcName, struct Token **toke
     struct Token *tokenSpace = malloc(tokenSpaceSize);
     if(!tokenSpace)
     {
-        fprintf(stderr, "Not enough memory for the lexer tokens.");
+        fprintf(stderr, "Not enough memory for the lexer tokens.\n");
         free(stringSpace);
         return false;
     }
@@ -436,7 +436,7 @@ bool lexFile(FILE *src, size_t srcSize, const char *srcName, struct Token **toke
                 );
                 if(!stringSpaceSize)
                 {
-                    fprintf(stderr, "Not enough memory to resize lexer identifiers.");
+                    fprintf(stderr, "Not enough memory to resize lexer identifiers.\n");
                     goto Cleanup;
                 }
 
@@ -456,7 +456,7 @@ bool lexFile(FILE *src, size_t srcSize, const char *srcName, struct Token **toke
         );
         if(!tokenSpaceSize)
         {
-            fprintf(stderr, "Not enough memory to resize lexer tokens.");
+            fprintf(stderr, "Not enough memory to resize lexer tokens.\n");
             goto Cleanup;
         }
 
@@ -475,7 +475,7 @@ ExitWhile:
     );
     if(!tokenSpaceSize)
     {
-        fprintf(stderr, "Not enough memory to resize lexer tokens for EOF.");
+        fprintf(stderr, "Not enough memory to resize lexer tokens for EOF.\n");
         goto Cleanup;
     }
 
