@@ -92,6 +92,7 @@ static error_t parseOpt(int key, char *arg, struct argp_state *state)
             break;
         case OPT_EMIT_LLVM:
             arguments->emitLlvm = arg;
+            break;
         
         case ARGP_KEY_ARG:
             if(state->arg_num > 1)
