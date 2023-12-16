@@ -5,6 +5,12 @@ The ANSLL compiler and language are works in progress.
 
 It is not currently in a working state.
 
+## Platforms
+
+The ANSLL compiler currently only builds on Linux since it depends on GNU argp.
+It is built with being cross-platform in mind, and besides for argp it should
+work on any POSIX-compliant system and support for Windows is in progress.
+
 ## Build
 
 ```shell
