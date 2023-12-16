@@ -42,14 +42,14 @@ $(OUT): $(SRCS) $(HBLIB)
 	$(MKDIR) $(BIN)
 	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) -L$(LIBS) -lhashedbrown $^ -o $(OUT)
 
-$(HBSRC):
-	git clone https://github.com/penguin-teal/hashedbrown $(HBSRC)
-
-$(HBLIB): $(HBSRC)
+$(HBLIB):
+ifeq (,$(wildcard $(HBLIB)))
 	$(MKDIR) $(LIBS)
+	git clone https://github.com/penguin-teal/hashedbrown $(HBSRC)
 	make -C$(HBSRC) release
 	cp $(HBSRC)/bin/libhashedbrown.a $(HBLIB)
 	$(RMDIR) $(HBSRC)
+endif
 
 tests: $(TESTOUT)
 	$(RM) $^
