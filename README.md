@@ -5,6 +5,27 @@ The ANSLL compiler and language are works in progress.
 
 It is not currently in a working state.
 
+## Build
+
+```shell
+make
+```
+
+## Compile ANSLL
+
+Compile files by passing a directory containing `*.ansll` files to the
+compiler. This example compiles the `stdlib` folder.
+```shell
+./bin/ansllc ./stdlib
+```
+
+You can get verbose output with the `-v` flag:
+```shell
+./bin/ansllc -v ./stdlib
+```
+
+***Currently object files are produced but they are empty.***
+
 ## Idea
 
 The ANSLL language enforces 'units', similar to types.
