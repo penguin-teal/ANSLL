@@ -43,8 +43,7 @@ static enum TokenKind getToken(
         char *id,
         size_t idMax,
         union Num64 *numberLiteral,
-        struct FilePos *fpos,
-        enum TokenKind lastTok
+        struct FilePos *fpos
 )
 {
     int lastChar = *ch;
@@ -404,8 +403,7 @@ bool lexFile(FILE *src, size_t srcSize, const char *srcName, struct Token **toke
             identifier,
             sizeof identifier,
             &numberLiteral,
-            &fpos,
-            tok
+            &fpos
         );
 
         tokStruct.symbol = tok;
