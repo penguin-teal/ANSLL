@@ -16,7 +16,6 @@ INCLUDE		    := ./include
 SRC 		    := ./src
 SRCS  		    := $(wildcard $(SRC)/*.c)
 OUT				:= $(BIN)/ansllc
-INCLUDEFLAGS	:= -I$(INCLUDE)
 TESTSRC			:= ./tests
 TESTSRCS		:= $(wildcard $(TESTSRC)/*.c)
 TESTBIN			:= ./testbin
@@ -25,6 +24,8 @@ TESTOUT		    := $(TESTBIN)/test
 LIBS			:= ./libs
 HBLIB			:= $(LIBS)/libhashedbrown.a
 HBSRC			:= ./.hashedbrown
+
+INCLUDEFLAGS	:= -I$(INCLUDE) -I$(LIBS)
 
 CHECK_TEST_FLAGS:= -pthread -lcheck -lrt -lm
 
@@ -48,6 +49,7 @@ ifeq (,$(wildcard $(HBLIB)))
 	git clone https://github.com/penguin-teal/hashedbrown $(HBSRC)
 	make -C$(HBSRC) release
 	cp $(HBSRC)/bin/libhashedbrown.a $(HBLIB)
+	cp $(HBSRC)/include/hashedbrown.h $(LIBS)/hashedbrown.h
 	$(RMDIR) $(HBSRC)
 endif
 
