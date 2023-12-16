@@ -73,6 +73,8 @@ bool fReadFileDir(FDir *dir, char *name, size_t nameSize)
         char type = entry->d_type;
         if(type != DT_REG && type != DT_UNKNOWN) continue;
 
+        // Copying name into buffer instead of returning it since
+        // this name can be overwritten on subsequent readdir calls.
         strncpy(name, entry->d_name, sizeMin(sizeof entry->d_name, nameSize));
         return true;
     }
