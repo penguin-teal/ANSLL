@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/penguin-teal/ansll/actions/workflows/Build.yml/badge.svg)](https://github.com/penguin-teal/ansll/actions/workflows/Build.yml)
+
 # ANSLL
 Another Not So Low Level Language compiler.
 
