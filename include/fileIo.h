@@ -1,3 +1,6 @@
+#ifndef FILEIO_H
+#define FILEIO_H
+
 #include <stdio.h>
 
 /**
@@ -6,4 +9,6 @@
  * @return The size of the given file, in bytes.
  */
 size_t fGetSize(FILE *f);
+
+#endif
 
