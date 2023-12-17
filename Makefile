@@ -41,13 +41,13 @@ debug: $(OUT) tests
 
 $(OUT): $(SRCS) $(HBLIB)
 	$(MKDIR) $(BIN)
-	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) -L$(LIBS) -lhashedbrown $^ -o $(OUT)
+	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) -L$(LIBS) -lhashedbrown $^ -o $@
 
 $(HBLIB):
 ifeq (,$(wildcard $(HBLIB)))
 	$(MKDIR) $(LIBS)
 	git clone https://github.com/penguin-teal/hashedbrown $(HBSRC)
-	make -C$(HBSRC) release
+	make -C$(HBSRC) release CC=$(CC)
 	cp $(HBSRC)/bin/libhashedbrown.a $(HBLIB)
 	cp $(HBSRC)/include/hashedbrown.h $(LIBS)/hashedbrown.h
 	$(RMDIR) $(HBSRC)
