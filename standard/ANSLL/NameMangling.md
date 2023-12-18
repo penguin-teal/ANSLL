@@ -41,7 +41,7 @@ Then the name of a function is comprised of the following:
 
 From here each parameter's unit is printed as the following:
 
-- Unit name with special characters encoded (e.g. `s` or `Hz`)
+- Unit name with special characters encoded (e.g. `s` or `Hz`), if the unit is `none` then this is empty
 - `$`
 
 There may be zero or many of those unit-`$` pairs.
