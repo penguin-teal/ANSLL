@@ -30,7 +30,7 @@ HBSRC			:= ./.hashedbrown
 HBVERSION		:= 'v1.0.0'
 UTF8LIB			:= $(LIBS)/libutf8encoder.a
 UTF8SRC			:= ./.utf8encoder
-UTF8VERSION		:= 'v1.1.0'
+UTF8VERSION		:= 'v1.1.1'
 
 INCLUDEFLAGS	:= -I$(INCLUDE) -I$(LIBHEADERS)
 LIB_FLAGS		:= -L$(LIBS) -lutf8encoder -lhashedbrown 
