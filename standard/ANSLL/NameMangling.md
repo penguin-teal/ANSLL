@@ -1,9 +1,9 @@
-# Name Mangling
+# 1. Name Mangling
 
 All ANSLL functions should be mangled using the rules that follow unless
 specified to use C linkage.
 
-## ANSLL Mangling
+## a. ANSLL Mangling
 
 ### Special Characters
 
@@ -46,7 +46,7 @@ From here each parameter's unit is printed as the following:
 
 There may be zero or many of those unit-`$` pairs.
 
-## C Function Name
+## b. C Function Name
 
 If a function is specified to have C linkage, it should have a function name
 that is its raw function name. Note that this doesn't mean the identifier must
