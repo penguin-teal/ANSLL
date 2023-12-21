@@ -4,4 +4,8 @@ compile_commands.json
 bin/
 testbin/
 libs/
+libheaders/
+
+.hashedbrown/
+.utf8encoder/
 
