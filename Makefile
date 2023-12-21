@@ -9,7 +9,8 @@ EXTRA_CFLAGS	:=
 WARNINGS		:= -Wall -Wextra -Wfloat-equal -Wundef
 ERRORS			:= -Werror=implicit-int -Werror=implicit-function-declaration
 CFLAGS 		    := $(WARNINGS) $(ERRORS) -std=c99 $(EXTRA_CFLAGS) -D_POSIX_C_SOURCE
-LLVM_FLAGS		:= $(shell llvm-config --cflags --ldflags --system-libs --libs all)
+LLVM_FLAGS		:= $(shell llvm-config --cflags --libs all)
+LLVM_LIBS		:= $(shell llvm-config --system-libs --ldflags --libs all)
 CURRENT_CFLAGS	:=
 
 BIN   		    := ./bin
@@ -23,6 +24,7 @@ TESTBIN			:= ./testbin
 TESTOUT		    := $(TESTBIN)/test
 
 LIBS			:= ./libs
+LIBHEADERS		:= ./libheaders
 HBLIB			:= $(LIBS)/libhashedbrown.a
 HBSRC			:= ./.hashedbrown
 HBVERSION		:= 'v1.0.0'
@@ -30,7 +32,8 @@ UTF8LIB			:= $(LIBS)/libutf8encoder.a
 UTF8SRC			:= ./.utf8encoder
 UTF8VERSION		:= 'v1.1.0'
 
-INCLUDEFLAGS	:= -I$(INCLUDE) -I$(LIBS)
+INCLUDEFLAGS	:= -I$(INCLUDE) -I$(LIBHEADERS)
+LIB_FLAGS		:= -L$(LIBS) -lutf8encoder -lhashedbrown 
 
 DESTDIR			:= /usr/local/bin
 
@@ -44,25 +47,25 @@ debug: $(OUT) tests
 
 $(OUT): $(SRCS) $(HBLIB) $(UTF8LIB)
 	$(MKDIR) $(BIN)
-	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) -L$(LIBS) -lhashedbrown $^ -o $@
+	$(CC) $(CFLAGS) $(CURRENT_CFLAGS) $(INCLUDEFLAGS) $(LLVM_FLAGS) $(SRCS) -o $@ $(LLVM_LIBS) $(LIB_FLAGS)
 
 $(HBLIB):
 ifeq (,$(wildcard $(HBLIB)))
-	$(MKDIR) $(LIBS)
+	$(MKDIR) $(LIBS) $(LIBHEADERS)
 	$(GITCLONETAG) $(HBVERSION) https://github.com/penguin-teal/hashedbrown $(HBSRC)
 	make -C$(HBSRC) release CC=$(CC)
 	cp $(HBSRC)/bin/libhashedbrown.a $(HBLIB)
-	cp $(HBSRC)/include/hashedbrown.h $(LIBS)/hashedbrown.h
+	cp $(HBSRC)/include/hashedbrown.h $(LIBHEADERS)/hashedbrown.h
 	$(RMDIR) $(HBSRC)
 endif
 
 $(UTF8LIB):
 ifeq (,$(wilcard $(UTF8LIB)))
-	$(MKDIR) $(LIBS)
+	$(MKDIR) $(LIBS) $(LIBHEADERS)
 	$(GITCLONETAG) $(UTF8VERSION) https://github.com/penguin-teal/utf8encoder $(UTF8SRC)
 	make -C$(UTF8SRC) static CC=$(CC)
 	cp $(UTF8SRC)/bin/libutf8encoder.a $(UTF8LIB)
-	cp $(UTF8SRC)/include/utf8encoder.h $(LIBS)/utf8encoder.h
+	cp $(UTF8SRC)/include/utf8encoder.h $(LIBHEADERS)/utf8encoder.h
 	$(RMDIR) $(UTF8SRC)
 endif
 
@@ -78,4 +81,4 @@ install:
 	$(CP) $(OUT) $(DESTDIR)/ansllc
 
 clean:
-	$(RMDIR) $(TESTBIN) $(BIN) $(LIBS) $(HBSRC) $(UTF8SRC)
+	$(RMDIR) $(TESTBIN) $(BIN) $(LIBS) $(HBSRC) $(UTF8SRC) $(LIBHEADERS)
