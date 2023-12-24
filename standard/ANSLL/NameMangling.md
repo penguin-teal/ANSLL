@@ -17,13 +17,13 @@ identifier. The following characters are not special:
 Any other character is special and should be encoded as the following:
 
 - Start with `@`
-- Base 16 length of base 16 code point
-- Base 16 hexadecimal code point
+- Upper case Base 16 length of base 16 code point
+- Upper case Base 16 hexadecimal code point
 
 The "code point" is the code point itself and *not* its binary representation.
 
 For example `¡` inverted exclamation point is encoded as `@2A0`,
-and `ϑ` Greek theta is encoded as `@403D1`.
+and `ϑ` Greek theta is encoded as `@33D1`. Leading zeroes are trimmed.
 
 ### Mangled Function Name
 
