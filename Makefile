@@ -70,12 +70,12 @@ ifeq (,$(wilcard $(UTF8LIB)))
 endif
 
 tests: $(TESTOUT)
+	$(TESTOUT)
 	$(RM) $^
 
-$(TESTOUT): $(TESTSRC)/main.c
-	$(PRINTF) 'Tests not implemented yet.\n'
+$(TESTOUT): $(TESTSRCS) $(SRC)/mangleName.c
 	$(MKDIR) $(TESTBIN)
-	$(CC) $(CFLAGS) -g3 -O0 -DDEBUG $^ -o $@
+	$(CC) $(CFLAGS) $(INCLUDEFLAGS) -g3 -O0 -DDEBUG $^ -o $@ $(LIB_FLAGS)
 
 install:
 	$(CP) $(OUT) $(DESTDIR)/ansllc
