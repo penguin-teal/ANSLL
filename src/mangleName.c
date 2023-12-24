@@ -19,7 +19,7 @@ static size_t print(char *dest, const char *src, size_t srcLen, size_t currentLe
 
 static size_t printUtf8Char(char *dest, const char *c, size_t currentLen, size_t bufferSize)
 {
-    if(isalnum(c) || c[0] == '_')
+    if(isalnum(c[0]) || c[0] == '_')
     {
         if(dest && currentLen < bufferSize - 1) dest[currentLen] = c[0];
         return currentLen + 1;
